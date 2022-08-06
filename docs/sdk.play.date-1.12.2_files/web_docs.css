@@ -1,0 +1,585 @@
+@charset "utf-8";
+
+/*! fonts.css */
+
+@font-face
+{
+	font-family: 'Roobert';
+	src: url('/fonts/roobert/Roobert-Regular.woff2') format('woff2'),
+		url('/fonts/roobert/Roobert-Regular.woff') format('woff'),
+		url('/fonts/roobert/Roobert-Regular.eot') format('embedded-opentype');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face
+{
+	font-family: 'Roobert';
+	src: url('/fonts/roobert/Roobert-SemiBold.woff2') format('woff2'),
+		url('/fonts/roobert/Roobert-SemiBold.woff') format('woff'),
+		url('/fonts/roobert/Roobert-SemiBold.eot') format('embedded-opentype');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face
+{
+	font-family: 'Roobert';
+	src: url('/fonts/roobert/Roobert-Heavy.woff2') format('woff2'),
+		url('/fonts/roobert/Roobert-Heavy.woff') format('woff'),
+		url('/fonts/roobert/Roobert-Heavy.eot') format('embedded-opentype');
+	font-weight: 800;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* ---------------------------------------------------------------- */
+
+/*! navbar.css  */
+/* Prevent fixed navbar from covering up deep-linked anchors. */
+:target
+{
+	/* Safari < 14.5 needs this non-standard property */
+	scroll-snap-margin-top: 4em;
+	scroll-margin-top: 4em;
+}
+
+.anchorjs-link
+{
+	margin-left: -4rem !important;
+}
+
+:target .anchorjs-link
+{
+	margin-left: -5rem !important;
+}
+
+@media (min-width: 670px)
+{
+	.anchorjs-link
+	{
+		margin-left: -2rem !important;
+	}
+
+	:target .anchorjs-link
+	{
+		margin-left: -3.5rem !important;
+	}
+}
+
+.navbar-top
+{
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	transition-property: background-color;
+	transition-timing-function: ease-in-out;
+	transition-duration: 250ms;
+	background-color: transparent;
+}
+
+body.reduce-motion .navbar-top,
+body.reduce-motion .navbar-top:after
+{
+	transition-property: none;
+}
+
+@media screen and (prefers-reduced-motion)
+{
+	.navbar-top
+	{
+		transition-property: none;
+	}
+}
+
+#navbar
+{
+	font-family: "Roobert", Helvetica, sans-serif;
+	background-color: var(--boxBackground);
+	color: var(--foreground);
+	border-bottom: 0.1rem solid transparent;
+	min-width: 320px;
+}
+
+#navbar.scrolled
+{
+	border-bottom: 0.1rem solid var(--subtler);
+}
+
+.navbar-top ul
+{
+	list-style: none;
+	display: grid;
+	grid-template-columns: auto 1fr auto auto auto auto auto;
+	grid-gap: 0;
+	margin: 0 auto;
+	padding: 0.25em;
+	position: relative;
+	font-size: 0.85em;
+}
+
+.navbar-top ul
+{
+	grid-template-columns: auto 1fr auto;
+}
+
+.navbar-top li
+{
+	margin: 0;
+	padding: 0.15em 0.5em 0.25em 0.5em;
+	position: relative;
+	font-weight: 700;
+	letter-spacing: -0.0075em;
+	border-radius: 1em;
+	color: var(--foreground);
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-gap: 0.2em;
+	align-items: center;
+	justify-items: start;
+}
+
+.navbar-top li a
+{
+	text-decoration: none;
+}
+
+.navbar-top li a::after
+{
+	content: "";
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+.navbar-top li::before
+{
+	content: '';
+	display: inline-block;
+	top: 0;
+	left: 0;
+	width: 1em;
+	height: 1em;
+	-webkit-mask-size: contain;
+	-webkit-mask-position: 0% 50%;
+	-webkit-mask-repeat: no-repeat;
+	background-color: var(--foreground);
+}
+
+/* Hamburger Menu Active */
+
+input#whopper
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+
+	position: relative;
+	display: block;
+	visibility: visible;
+
+	font: inherit;
+	font-weight: 700;
+	color: var(--foreground);
+
+	align-items: center;
+	justify-items: start;
+	grid-column: 6;
+	grid-row: 1;
+
+	width: 2em;
+	height: 2em;
+	cursor: pointer;
+	z-index: 111111;
+	pointer-events: all;
+	-webkit-appearance: none;
+}
+
+input#whopper::before
+{
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-mask-size: contain;
+	-webkit-mask-position: 0% 50%;
+	-webkit-mask-repeat: no-repeat;
+	-webkit-mask-image: url("/images/menu.svg");
+
+	background-color: var(--foreground);
+	background-size: contain;
+}
+
+label.whopper
+{
+	display: none;
+}
+
+div.whopper
+{
+	display: grid;
+	position: absolute;
+	grid-gap: 0.5em;
+	margin-top: -0.5em;
+	top: 0;
+	right: -100vw;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto auto auto auto;
+	padding: 0.5em 2.5em 0.5em 0.5em;
+	background: var(--pageBackground);
+	color: var(--foreground);
+	border-radius: 0 0 0 0.25em;
+	border: 0.2rem solid var(--foreground);
+	border-top: 0;
+	border-right: 0;
+
+	transition-duration: 150ms;
+	transition-timing-function: ease-in-out;
+	transition-property: right;
+	pointer-events: none;
+}
+
+input#whopper:checked + div.whopper
+{
+	right: 0;
+	pointer-events: all;
+}
+
+input#whopper:checked::before
+{
+	background: var(--interactive);
+}
+
+input#whopper:checked + div.whopper > li:hover
+{
+	color: var(--interactive);
+}
+
+input#whopper:checked + div.whopper > li:hover::before
+{
+	background-color: var(--interactive);
+}
+
+li#nav-buy
+{
+	grid-row: 1;
+	grid-column: 2 / span 3;
+	align-self: center;
+	justify-self: end;
+}
+
+li#nav-news,
+li#nav-games,
+li#nav-dev,
+li#nav-help,
+li#nav-account
+{
+	grid-column: 1;
+}
+
+li#nav-news
+{
+	grid-row: 1;
+}
+
+li#nav-games
+{
+	grid-row: 2;
+}
+
+li#nav-dev
+{
+	grid-row: 3;
+}
+
+li#nav-help
+{
+	grid-row: 4;
+}
+
+li#nav-account
+{
+	grid-row: 5;
+}
+
+@media (min-width: 670px)
+{
+
+	/* Hamburger Menu Hidden */
+	div.whopper,
+	input#whopper:checked + div.whopper
+	{
+		font-size: 1em;
+		display: contents;
+		pointer-events: all;
+	}
+
+	input#whopper
+	{
+		pointer-events: none;
+		visibility: hidden;
+	}
+
+	li#nav-news,
+	li#nav-games,
+	li#nav-dev,
+	li#nav-help,
+	li#nav-account,
+	li#nav-buy
+	{
+		grid-row: 1;
+	}
+
+	li#nav-news
+	{
+		grid-column: 3;
+	}
+
+	li#nav-games
+	{
+		grid-column: 4;
+	}
+
+	li#nav-dev
+	{
+		grid-column: 5;
+	}
+
+	li#nav-help
+	{
+		grid-column: 6;
+	}
+
+	li#nav-account
+	{
+		grid-column: 7;
+	}
+
+	li#nav-buy
+	{
+		grid-column: 8;
+	}
+}
+
+li#nav-home
+{
+	grid-row: 1;
+	grid-column: 1;
+	top: 0.125em;
+}
+
+li#nav-home::before { -webkit-mask-image: url("/images/playdate-logo.svg"); }
+li#nav-news::before { -webkit-mask-image: url("/images/toolbar-icon-news.svg"); }
+li#nav-games::before { -webkit-mask-image: url("/images/toolbar-icon-games.svg"); }
+li#nav-dev::before { -webkit-mask-image: url("/images/toolbar-icon-dev.svg"); }
+li#nav-help::before { -webkit-mask-image: url("/images/toolbar-icon-help.svg"); }
+li#nav-account::before { -webkit-mask-image: url("/images/toolbar-icon-account.svg"); }
+li#nav-buy::before { -webkit-mask-image: url("/images/toolbar-icon-shop.svg"); }
+
+li#nav-home
+{
+	position: relative;
+	color: transparent;
+}
+
+li#nav-home::before
+{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+li#nav-buy
+{
+	color: var(--white);
+	background-color: var(--purple);
+}
+
+li#nav-buy::before
+{
+	background-color: var(--white);
+}
+
+#navbar a
+{
+	color: inherit;
+}
+
+#navbar
+{
+	z-index: 200;
+}
+
+#toc
+{
+	z-index: 100;
+	padding-bottom: 4em;
+}
+
+body
+{
+	padding-top: 3em;
+	padding-bottom: 4em;
+}
+
+#docSwitcher
+{
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	font-size: 0.75em;
+	display: grid;
+	align-items: center;
+	width: 100vw;
+	grid-template-columns: 1fr auto;
+	z-index: 200;
+	opacity: 0.95;
+	pointer-events: none;
+}
+
+#docSwitcher form
+{
+	grid-column: 2;
+	grid-row: 1;
+}
+
+#docSwitcher label
+{
+	text-transform: uppercase;
+	font-size: 1em;
+	font-weight: 200;
+}
+
+#docSwitcher select
+{
+	-webkit-appearance: none;
+	border: 0;
+	padding: 0;
+	margin: 0.5em;
+	background: inherit;
+	font: inherit;
+	border: 0.1rem solid var(--purple);
+	border-radius: 0.25em;
+	background: var(--muted-purple);
+	color: var(--white);
+	padding: 0.25em 1em;
+	pointer-events: all;
+	font-weight: 400;
+}
+
+#docSwitcher #deprecationWarning
+{
+	grid-column: 1;
+	grid-row: 1;
+	place-self: stretch;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--white);
+	opacity: 0;
+}
+
+#docSwitcher.deprecated
+{
+	background-color: var(--negative);
+}
+
+#docSwitcher.deprecated #deprecationWarning
+{
+	opacity: 1;
+}
+
+#toc a.active
+{
+	font-weight: 700;
+	border-left: 0.25em solid var(--interactive);
+	padding-left: 0.35em;
+}
+
+/* ---------------------------- */
+/*!---- RESPONSIVE SCALING ---- */
+/* ---------------------------- */
+
+html
+{
+	font-size: 2.4px;
+}
+
+body
+{
+	font-size: 3rem;
+}
+
+#toc
+{
+	top: 3em;
+	padding-top: 3rem;
+}
+
+/* Start scaling */
+@media screen and (min-width: 240px)
+{
+	html
+	{
+		font-size: 1vw;
+	}
+
+	body
+	{
+		font-size: 4rem;
+		line-height: 1.3;
+	}
+
+	main
+	{
+		font-size: 3.2rem;
+	}
+}
+
+@media screen and (min-width: 670px)
+{
+	body
+	{
+		font-size: 2.4rem;
+	}
+
+	main
+	{
+		font-size: 2rem;
+	}
+
+	#toc
+	{
+		padding-top: 3em;
+	}
+
+	#header
+	{
+		margin-top: 0;
+		padding-top: 0;
+	}
+
+}
+
+/* Stop scaling */
+@media screen and (min-width: 1000px)
+{
+	html
+	{
+		font-size: 10px;
+	}
+
+	main
+	{
+		font-size: 1.8rem;
+	}
+}
